@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Captions Suggester</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato|Playfair+Display|Heebo|Roboto:900|PT+Serif:700" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Captions Suggester</h1>
+        <a class="ghost" onclick="show()">Upload Image</a>
+        <div id="hide">
+            <div class="image">Image</div>
+            <div class="captions"><p id="caption">Caption</p></div>
+            <button onclick="next()">Next</button>
+        </div>
+    </body>
+    <script>
+
+        var captions = [1,2,3,4,5,6,7,8];
+        var i = 0;
+        function show()
+        {
+            document.getElementById("hide").style.display ="inline";
+        }
+
+        function next()
+        {
+            document.getElementById("caption").innerHTML = 'Caption '+ captions[i];
+            i = i + 1;
+
+            if(i > captions.length -1)
+                i = 0;
+        }
+    </script>
+</html>
