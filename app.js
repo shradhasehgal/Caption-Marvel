@@ -6,6 +6,7 @@ var request = require('request'),
 var fs = require('fs');
 const captions = fs.readFileSync('captions.txt').toString().split("\n");
 
+  
 request.get('https://api.imagga.com/v2/tags?image_url='+encodeURIComponent(imageUrl), function (error, response, body) {
    if (response.statusCode == 200) {
         var v = JSON.parse(body);
@@ -14,10 +15,10 @@ request.get('https://api.imagga.com/v2/tags?image_url='+encodeURIComponent(image
         for (i=0; i < v.length; i++) {
             var key = v[i]["tag"]["en"];
             console.log(key);
-            
+             
             for (var caption in captions) {
-                if (caption.includes(key)) {
-                    console.log("yeet", caption);
+                if (captions[caption].includes(key)) {
+                    console.log(captions[caption]);
                 }
             }
         }
