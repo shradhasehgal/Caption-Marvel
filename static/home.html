@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Captions Suggester</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link href="https://fonts.googleapis.com/css?family=Hind:400,500|Playfair+Display:400,700&display=swap" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="./script.js"></script>
+        <link href="https://unpkg.com/ionicons@4.5.10-1/dist/css/ionicons.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                    <h1>Captions Suggester</h1>
+                    <h2>A project by <a href="#">Shradha Sehgal</a> and <a href="#">Nishant Gadihoke</a></h2>
+            </header>
+            <main>
+                <div class="step one">
+                    <h3>Upload Image</h3>
+                    <div class="step-content">
+                        <p>Select an image which you want caption ideas for and upload it.</p>
+                        <input type="file" id="uploader" style="display: none;">
+                        <input type="button" class="button" value="Select image" onclick="$('#uploader').click();" />
+                        <img src="" id="preview" alt="">
+                        <input type="button" id="generate" class="button primary" value="Get captions!" />
+                    </div>
+                </div>
+                <div class="step two disabled minimise">
+                    <h3>Get Captions</h3>
+                    <div class="step-content">
+                    <p>Click on a caption to copy it.</p>
+                    <img src="" id="preview-caption" alt="">
+                    <ul class="captions">
+                        <li class="caption">
+                            <p class="caption-text">I’mma sip it ‘til i feel it, I’mma smoke it ‘til it’s done</p>
+                            <i class="icon ion-md-copy"></i>
+                        </li>
+                        <li class="caption">
+                            <p class="caption-text">Worrying about your followers, you need to get your dollars up</p>
+                            <i class="icon ion-md-copy"></i>
+                        </li>
+                        <li class="caption">
+                            <p class="caption-text">When I feel a little down, I put on my favorite high heels and dance.</p>
+                            <i class="icon ion-md-copy"></i>
+                        </li> 
+                        <li class="caption">
+                            <p class="caption-text">Never love anyone who treats you like you’re ordinary.</p>
+                            <i class="icon ion-md-copy"></i>
+                        </li> 
+                    </ul>
+                </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
