@@ -56,12 +56,6 @@ $(document).ready(function() {
         $('.step.two').removeClass('disabled');
         $('.step.two .step-content').slideDown();
 
-        // send value of input type file to Imagga
-        // get image upload ID
-        // send upload ID to categorisation API
-        // get categorisation and find captions
-        // return captions to frontend
-
     }
     
     $("#image").change(function() {
@@ -72,30 +66,6 @@ $(document).ready(function() {
         e.preventDefault();
         generateCaption();
     });
-
-    function copyText(element) {
-        var range, selection, worked;
-      
-        if (document.body.createTextRange) {
-          range = document.body.createTextRange();
-          range.moveToElementText(element);
-          range.select();
-        } else if (window.getSelection) {
-          selection = window.getSelection();        
-          range = document.createRange();
-          range.selectNodeContents(element);
-          selection.removeAllRanges();
-          selection.addRange(range);
-        }
-        
-        try {
-          document.execCommand('copy');
-          alert('text copied');
-        }
-        catch (err) {
-          alert('unable to copy text');
-        }
-      }
     
     $('.icon.ion-md-copy').click(function(){
         var v = $(this).prev();
@@ -119,19 +89,3 @@ $(document).ready(function() {
             count = 0;
     }
 });
-
-// var captions = [1,2,3,4,5,6,7,8];
-// var i = 0;
-// function show()
-// {
-//     document.getElementById("hide").style.display ="inline";
-// }
-
-// function next()
-// {
-//     document.getElementById("caption").innerHTML = 'Caption '+ captions[i];
-//     i = i + 1;
-
-//     if(i > captions.length -1)
-//         i = 0;
-// }

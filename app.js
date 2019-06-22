@@ -35,12 +35,19 @@ app.post('/generate-captions', function(req, res) {
                     v = v["result"]["tags"];
 
                     for (i=0; i < v.length; i++) {
-                        var key = v[i]["tag"]["en"];
-                        console.log(key);
-                        
-                        for (var caption in captions) {
-                            if (captions[caption].includes(key)) {
-                                list.push(captions[caption]);
+                        var con = v[i]["confidence"];
+                        console.log(con)
+                        console.log(v[i]["tag"]["en"])
+                        if(parseInt(con) >= 20)
+                        {
+                            var key = v[i]["tag"]["en"];
+                            let str = new RegExp("\\b" + key + "\\b");
+                            console.log(str)
+                            for (var caption in captions) {
+                                if (str.test(captions[caption])) {
+                                    list.push(captions[caption]);
+                                    console.log(captions[caption])
+                                }
                             }
                         }
                     }
