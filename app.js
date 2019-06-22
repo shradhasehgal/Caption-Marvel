@@ -28,7 +28,9 @@ app.post('/generate-captions', function(req, res) {
             if (error) {
                 //send front end message to show error
             } else {
-                //send front end the body and parse it nicely in the JS
+
+                list=[]
+
                 var v = JSON.parse(body);
                     v = v["result"]["tags"];
 
@@ -38,10 +40,12 @@ app.post('/generate-captions', function(req, res) {
                         
                         for (var caption in captions) {
                             if (captions[caption].includes(key)) {
-                                console.log(captions[caption]);
+                                list.push(captions[caption]);
                             }
                         }
                     }
+
+                    res.send(list)
                     //send these captions to front end inside res.send();
             }
         }).auth(apiKey, apiSecret, true);
