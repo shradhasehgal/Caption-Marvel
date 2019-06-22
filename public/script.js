@@ -72,7 +72,41 @@ $(document).ready(function() {
         e.preventDefault();
         generateCaption();
     });
+
+    function copyText(element) {
+        var range, selection, worked;
+      
+        if (document.body.createTextRange) {
+          range = document.body.createTextRange();
+          range.moveToElementText(element);
+          range.select();
+        } else if (window.getSelection) {
+          selection = window.getSelection();        
+          range = document.createRange();
+          range.selectNodeContents(element);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+        
+        try {
+          document.execCommand('copy');
+          alert('text copied');
+        }
+        catch (err) {
+          alert('unable to copy text');
+        }
+      }
     
+    $('.icon.ion-md-copy').click(function(){
+        var v = $(this).prev();
+        const el = document.createElement('textarea');
+        el.value = v.html();
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    });
+
     next = function()
     {
         for(var i=1; i <= 4; i++)
