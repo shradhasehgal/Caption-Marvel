@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     displayImage = function(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -11,6 +12,22 @@ $(document).ready(function() {
     }
     
     generateCaption = function() {
+
+        var form = $('#upload-image');
+        var formData = new FormData($(form)[0]);
+
+        $.ajax({
+            url: '/generate-captions',
+            type: 'POST',
+            data: formData,
+            async: false,
+            success: function (data) {
+                alert(data);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
 
         $('.step.one .step-content').slideUp();
         $('.step.two').removeClass('disabled');
@@ -27,11 +44,12 @@ $(document).ready(function() {
 
     }
     
-    $("#uploader").change(function() {
+    $("#image").change(function() {
         displayImage(this);
     });
 
-    $('#generate').click(function(){
+    $('#upload-image').submit(function(e){
+        e.preventDefault();
         generateCaption();
     });
     

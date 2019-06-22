@@ -3,10 +3,10 @@
     <head>
         <title>Captions Suggester</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link rel="stylesheet" type="text/css" href="/style.css">
         <link href="https://fonts.googleapis.com/css?family=Hind:400,500|Playfair+Display:400,700&display=swap" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="./script.js"></script>
+        <script src="/script.js"></script>
         <link href="https://unpkg.com/ionicons@4.5.10-1/dist/css/ionicons.min.css" rel="stylesheet">
     </head>
     <body>
@@ -20,10 +20,12 @@
                     <h3>Upload Image</h3>
                     <div class="step-content">
                         <p>Select an image which you want caption ideas for and upload it.</p>
-                        <input type="file" id="uploader" style="display: none;">
-                        <input type="button" class="button" value="Select image" onclick="$('#uploader').click();" />
-                        <img src="" id="preview" alt="">
-                        <input type="button" id="generate" class="button primary" value="Get captions!" />
+                        <form id="upload-image">
+                            <input type="file" name="image" id="image" style="display: none;">
+                            <input type="button" class="button" value="Select image" onclick="$('#image').click();" />
+                            <img src="" id="preview" alt="">
+                            <input type="submit" id="generate" class="button primary" value="Get captions!" />
+                        </form>
                     </div>
                 </div>
                 <div class="step two disabled minimise">

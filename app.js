@@ -1,27 +1,52 @@
-var request = require('request'),
-    apiKey = 'acc_d3b8479014ade5a',
-    apiSecret = '7b01c8f7a8f9106d7bbb1cdf1e97b70e',
-    imageUrl = 'https://imagga.com/static/images/tagging/wind-farm-538576_640.jpg';
+const express = require('express');
+const fileUpload = require('express-fileupload');
+const app = express();
+const path = require('path');
 
-var fs = require('fs');
+const fs = require('fs');
 const captions = fs.readFileSync('captions.txt').toString().split("\n");
 
+const   request = require('request'),
+        apiKey = 'acc_d3b8479014ade5a',
+        apiSecret = '7b01c8f7a8f9106d7bbb1cdf1e97b70e';
+
+app.use(express.static('public'));
+app.use(fileUpload());
+
+app.get("/", express.static(path.join(__dirname, "./public")));
+
+app.post('/generate-captions', function(req, res) {
   
-request.get('https://api.imagga.com/v2/tags?image_url='+encodeURIComponent(imageUrl), function (error, response, body) {
-   if (response.statusCode == 200) {
-        var v = JSON.parse(body);
-        v = v["result"]["tags"];
+    let file = req.files.image.data;
+    
+    var formData = {
+        image: file
+    };
 
-        for (i=0; i < v.length; i++) {
-            var key = v[i]["tag"]["en"];
-            console.log(key);
-             
-            for (var caption in captions) {
-                if (captions[caption].includes(key)) {
-                    console.log(captions[caption]);
-                }
+    request.post({url:'https://api.imagga.com/v2/tags', formData: formData},
+        function (error, response, body) {
+            if (error) {
+                //send front end message to show error
+            } else {
+                //send front end the body and parse it nicely in the JS
+                var v = JSON.parse(body);
+                    v = v["result"]["tags"];
+
+                    for (i=0; i < v.length; i++) {
+                        var key = v[i]["tag"]["en"];
+                        console.log(key);
+                        
+                        for (var caption in captions) {
+                            if (captions[caption].includes(key)) {
+                                console.log(captions[caption]);
+                            }
+                        }
+                    }
+                    //send these captions to front end inside res.send();
             }
-        }
-    }
+        }).auth(apiKey, apiSecret, true);
+  });  
 
-}).auth(apiKey, apiSecret, true);
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => console.log('App running on port', PORT));
